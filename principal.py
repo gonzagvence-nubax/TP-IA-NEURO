@@ -4,6 +4,7 @@ from utils import *
 import torch 
 import random
 import numpy as np
+
 class Connect4State:
     def __init__(self,rows=6,cols=7): 
         self.rows = rows
@@ -44,15 +45,6 @@ class Connect4State:
         #dos estados son iguales si tienen el mismo tablero y el mismo jugador actual
         return np.array_equal(self.board, other.board) and self.current_player == other.current_player
 
-    def __hash__(self): 
-        """
-        Genera un hash único para el estado.
-        
-        Returns:
-            Hash del estado basado en el tablero y jugador actual.
-        """
-        
-        pass
 
     def __repr__(self):
         """

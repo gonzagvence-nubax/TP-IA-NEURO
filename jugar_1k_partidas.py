@@ -1,9 +1,5 @@
-import argparse
 from connect4 import Connect4
 from agentes import Agent, RandomAgent,DefenderAgent
-from principal import TrainedAgent
-import torch
-from pathlib import Path
 
 def jugar_mil_partidas(verbose, trained_first=True, agent=None, contrincante=None):
     # Crea el agente entrenado
