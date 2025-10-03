@@ -1,0 +1,7 @@
+🔎 Iteración 7 con parámetros: {'episodes': 2000, 'gamma': 0.9, 'epsilon_start': 0.8, 'epsilon_min': 0.1, 'epsilon_decay': 0.995, 'alpha': 0.001, 'batch_size': 32, 'memory_size': 20000, 'target_update_every': 20}
+El modelo ganó 923 de 1000 partidas contra None
+✅ Precisión obtenida: 923.0000
+
+🏆 Mejor modelo encontrado:
+Precisión: 923
+Parámetros: {'episodes': 2000, 'gamma': 0.9, 'epsilon_start': 0.8, 'epsilon_min': 0.1, 'epsilon_decay': 0.995, 'alpha': 0.001, 'batch_size': 32, 'memory_size': 20000, 'target_update_every': 20}

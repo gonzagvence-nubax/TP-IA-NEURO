@@ -296,17 +296,28 @@ class DeepQLearningAgent:
             self.epsilon = max(self.epsilon, self.epsilon_min)
 
 class TrainedAgent(Agent):
-    def __init__(self, model_path: str, state_shape: tuple, n_actions: int, device='cpu'):
+    def __init__(self, state_shape: tuple, n_actions: int, device='cpu', 
+                 model_path: str = None, q_network=None):
         self.device = device
         self.state_shape = state_shape
         self.n_actions = n_actions
-        
-        # Inicializar la red y cargar pesos
-        self.q_network = DQN(input_dim=state_shape[0]*state_shape[1], output_dim=n_actions).to(device)
-        self.q_network.load_state_dict(torch.load(model_path, map_location=device))
-        self.q_network.eval()  # Para que no haga dropout ni batchnorm si hubiese
-        
-        self.name = f"TrainedAgent_{model_path}"
+
+        if q_network is not None:
+            # Usar red ya entrenada
+            self.q_network = q_network.to(device)
+            self.name = "TrainedAgent_from_qnetwork"
+        elif model_path is not None:
+            # Cargar red desde archivo
+            self.q_network = DQN(
+                input_dim=state_shape[0]*state_shape[1], 
+                output_dim=n_actions
+            ).to(device)
+            self.q_network.load_state_dict(torch.load(model_path, map_location=device))
+            self.name = f"TrainedAgent_{model_path}"
+        else:
+            raise ValueError("Debes pasar 'model_path' o 'q_network' para inicializar el agente.")
+
+        self.q_network.eval()  # eval mode
 
     def play(self, state, valid_actions):
         # Convertimos el estado a tensor

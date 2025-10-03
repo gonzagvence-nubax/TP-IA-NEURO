@@ -10,7 +10,7 @@ def main(verbose, trained_first=True):
 
     # Crea el agente entrenado
     agente_entrenado:Agent = TrainedAgent(
-        model_path=Path("C:/Users/45187267/Downloads/tpIAyneuro/trained_model_vs_None_1000_0.99_1.0_0.1_0.9950.001_128_1000_100.pth"),
+        model_path=Path("/home/g_garcia/TP-IA-NEURO/trained_model_random_search_vs_None_best.pth"),
 
         state_shape=(6, 7),
         n_actions=7,
@@ -18,7 +18,7 @@ def main(verbose, trained_first=True):
     )
     
     # Crea el RandomAgent
-    agente_random:Agent = RandomAgent("random agent")
+    agente_random:Agent = DefenderAgent("def agent")
 
     if trained_first:
         agent1 = agente_entrenado
@@ -27,7 +27,7 @@ def main(verbose, trained_first=True):
         agent1 = agente_random
         agent2 = agente_entrenado
 
-    print(f"Juego: {agent1.name} (Nosotros) vs. random agent (Jugador 2)")
+    print(f"Juego: {agent1.name} (Nosotros) vs. def agent (Jugador 2)")
 
     juego = Connect4(agent1=agent1, agent2=agent2)
     ganador = juego.play(render=verbose)
@@ -40,7 +40,7 @@ def main(verbose, trained_first=True):
         print(f"Gana Nosotros (Jugador 1)")
         return 1
     else:
-        print("Gana el random agent (Jugador 2)")
+        print("Gana el def agent (Jugador 2)")
         return 0
     
     
